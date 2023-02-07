@@ -1,0 +1,17 @@
+.input-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 50vw;
+  margin: 0 auto;
+}
+.input-form > * {
+  min-width: 100%;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/*# sourceMappingURL=CreateForm.css.map */
