@@ -36,9 +36,16 @@ class CreateForm extends Component {
             alert("fill all empty fields please")
             return
         }
-
         if (this.state.bidAmount<minBidAmount) {
             alert("the bid amount is too low")
+            return
+        }
+        if (this.state.radius<0) {
+            alert("incorrect radius")
+            return
+        }
+        if (this.state.campaignFund<1) {
+            alert("incorrect campaign fund")
             return
         }
 
@@ -93,7 +100,7 @@ class CreateForm extends Component {
                 </label>
 
                 <label for="fund">Enter the campaign fund:
-                <input required type = "number" placeholder='campaign fund' name="fund" onChange={this.campaignFundChangeHandle}/>
+                <input required type = "number" placeholder='campaign fund' name="fund" min="1" onChange={this.campaignFundChangeHandle}/>
                 </label>
 
                 <label for="status">Enter the status:
@@ -107,7 +114,7 @@ class CreateForm extends Component {
                 </label>
 
                 <label for="radius">Enter the radius:
-                    <input type="number" name="radius" onChange={this.radiusChangeHandle}/>
+                    <input type="number" name="radius" min="0" onChange={this.radiusChangeHandle}/>
                 </label>
                 
                 <button type="submit" onClick={this.submitHandle}>submit</button>
