@@ -70,7 +70,7 @@ class CreateForm extends Component {
     }
 
     radiusChangeHandle(event) {
-        this.setState({...this.state, radius: event.target.value+"km"})
+        this.setState({...this.state, radius: event.target.value})
     }
 
     render() {
@@ -104,6 +104,10 @@ class CreateForm extends Component {
                 <select name = "town" onChange={this.townChangeHandle}>
                     {cities.map(value=><option value={value}>{value}</option>)}
                 </select>
+                </label>
+
+                <label for="radius">Enter the radius:
+                    <input type="number" name="radius" onChange={this.radiusChangeHandle}/>
                 </label>
                 
                 <button type="submit" onClick={this.submitHandle}>submit</button>

@@ -18,7 +18,7 @@ class Item extends Component {
             <p>{this.props.item.radius}km</p>
             <div>
               <Update/>
-              <Delete/>
+              <Delete deleteId={this.props.id} deleteFunc={this.props.deleteFunc}/>
             </div>
           </article>)
     }

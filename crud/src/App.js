@@ -108,26 +108,6 @@ let initialItem = {
   town: "",
   radius: 0
 }
-let initialList = [
-  {
-    name: "Apple",
-    keyWords: ["phone", "luxury"],
-    bidAmount: 2,
-    campaignFund: 100,
-    status: "on",
-    town: "Barcelona",
-    radius: 20
-  },
-  {
-    name: "SeaSmart",
-    keyWords: ["phone", "IOS"],
-    bidAmount: 1600,
-    campaignFund: 4000,
-    status: "off",
-    town: "Barcelona",
-    radius: 15
-  }
-]
        
 class App extends Component {
   constructor(props) {
@@ -136,10 +116,15 @@ class App extends Component {
       items: []
     }
     this.addItem=this.addItem.bind(this)
+    this.deleteItem = this.deleteItem.bind(this)
   }
 
   addItem(item) {
     this.setState({...this.state, items: [...this.state.items, item]})
+  }
+
+  deleteItem(id) {
+    this.setState({...this.state, items: [...this.state.items.filter((value, iter)=>iter!=id)]})
   }
 
   render() {
@@ -149,7 +134,7 @@ class App extends Component {
         <main className='main'>
           {this.state.items.map((item, iter)=>{
             return (
-              <Item key={iter} item={item}/>
+              <Item key={iter} id={iter} item={item} deleteFunc={this.deleteItem}/>
             )
           })}
         </main>
