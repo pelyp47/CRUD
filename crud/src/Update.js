@@ -9,7 +9,7 @@ class Update extends Component {
 
     render() {
         return(
-            <button>Update</button>
+            <button onClick={this.props.updateStatusChange}>Update</button>
         )
     }
 }
