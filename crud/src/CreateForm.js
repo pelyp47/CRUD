@@ -18,9 +18,13 @@ class CreateForm extends Component {
             town: "",
             radius: 0
         }
+
+        this.keyWordInput = React.createRef()
+
         this.submitHandle=this.submitHandle.bind(this)
         this.nameChangeHandle=this.nameChangeHandle.bind(this)
-        this.keywordsChangeHandle=this.keywordsChangeHandle.bind(this)
+        this.addKeyword = this.addKeyword.bind(this)
+        this.deleteKeyWord = this.deleteKeyWord.bind(this)
         this.bidAmountChangeHandle=this.bidAmountChangeHandle.bind(this)
         this.campaignFundChangeHandle=this.campaignFundChangeHandle.bind(this)
         this.statusChangeHandle=this.statusChangeHandle.bind(this)
@@ -32,8 +36,12 @@ class CreateForm extends Component {
         event.preventDefault()
 
         //validation
-        if(!this.state.name || !this.state.town) {
+        if (!this.state.name || !this.state.town) {
             alert("fill all empty fields please")
+            return
+        }
+        if (this.state.keyWords.length===0) {
+            alert("enter some key words")
             return
         }
         if (this.state.bidAmount<minBidAmount) {
@@ -56,8 +64,24 @@ class CreateForm extends Component {
         this.setState({...this.state, name: event.target.value})
     }
 
-    keywordsChangeHandle(event) {
-        this.setState({...this.state, keyWords: event.target.value.split(' ')})
+    addKeyword(event) {
+        if(!this.keyWordInput.current.value)return
+        if(this.state.keyWords.includes(this.keyWordInput.current.value)) {
+            alert("you've already added this keyword")
+            return
+        }
+        if(!keywords.includes(this.keyWordInput.current.value)) {
+            alert("this keyword is unavailable for now")
+            return
+        }
+        this.setState({...this.state, keyWords:[...this.state.keyWords, this.keyWordInput.current.value]})
+        this.keyWordInput.current.value=""
+    }
+
+    deleteKeyWord(event) {
+        this.setState({...this.state, keyWords: [...this.state.keyWords.filter((el, i)=>{
+            return i!=event.target.getAttribute("iter");
+        })]})
     }
 
     bidAmountChangeHandle(event) {
@@ -83,14 +107,19 @@ class CreateForm extends Component {
     render() {
         return (
             <div className='input-form'>
-                <label for="name" autocomplete="off">Enter campaign name:
-                <input required type = "text" placeholder='campaign name' name="name" onChange={this.nameChangeHandle}/>
+                <label htmlFor="name">Enter campaign name:
+                <input required type = "text" autoComplete="off" placeholder='campaign name' id="name" onChange={this.nameChangeHandle}/>
                 </label>
 
-                <label for="keywords">Enter keywords with space between:
-                <input required autocomplete="off" type = "text" placeholder='keywords' name="keywords" list="keywords" onChange={this.keywordsChangeHandle}/>
+                <label for="keywords">Enter keywords: 
+                {this.state.keyWords.map((el, iter)=>{
+                    return <div><span>{el}</span> <button iter={iter} onClick={this.deleteKeyWord}>-</button></div>
+                    })
+                }
+                <input required autoComplete="off" type = "text" placeholder='keywords' name="keywords" list="keywords" ref={this.keyWordInput}/>
+                <input value="+" type="submit" onClick={this.addKeyword}/>
                 <datalist id="keywords">
-                    {keywords.map(value=><option>{value}</option>)}
+                    {keywords.filter((el)=>!this.state.keyWords.includes(el)).map(value=><option>{value}</option>)}
                 </datalist>
                 </label>
 
