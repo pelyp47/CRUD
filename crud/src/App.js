@@ -55,7 +55,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <header class="header">
+        <header className="header">
           <EmeraldBalance balance={this.state.balance}/>
         </header>
         <main className='main'>
@@ -63,7 +63,7 @@ class App extends Component {
         
           {this.state.items.map((item, iter)=>{
             return (
-              <Item key={iter} deleteId={iter} item={item} deleteFunc={this.deleteItem} changeFunc={this.changeItem} changeBalanceFunc={this.changeBalanceOnChangeBalance}/>
+              <Item key={iter+"item"} deleteId={iter} item={item} deleteFunc={this.deleteItem} changeFunc={this.changeItem} changeBalanceFunc={this.changeBalanceOnChangeBalance}/>
             )
           })}
         </main>

@@ -34,31 +34,31 @@ class Item extends Component {
         return (
         <article className={`item ${this.props.item.status==="off"?"_off":""}`}>
             <h2 className="item__name">{this.props.item.name}</h2>
-            <p className="item__info-wrapper">
-              <span className="item__info-header">Keywords </span>
+            <p className="item__info-wrapper" key="keywords">
+              <span className="item__info-header" key="infoHeader">Keywords </span>
               <span className='item__keywords-wrapper'>
-                {this.props.item.keyWords.map(word=><span className="item__keyword">{word+" "}</span>)}
+                {this.props.item.keyWords.map((word, i)=><span className="item__keyword" key={"info"+i}>{word+" "}</span>)}
               </span>
             </p>
-            <p className="item__info-wrapper">
-              <span className="item__info-header">Bid amount </span>
-              <span className="item__info">{this.props.item.bidAmount}$</span>
+            <p className="item__info-wrapper" key="bidAmount">
+              <span className="item__info-header" key="infoHeader">Bid amount </span>
+              <span className="item__info" key="info">{this.props.item.bidAmount}$</span>
             </p>
-            <p className="item__info-wrapper">
-              <span className="item__info-header">Campaign fund </span>
-              <span className="item__info">{this.props.item.campaignFund}$</span>
+            <p className="item__info-wrapper" key="campaignFund">
+              <span className="item__info-header" key="infoHeader">Campaign fund </span>
+              <span className="item__info" key="info">{this.props.item.campaignFund}$</span>
             </p>
-            <p className="item__info-wrapper">
-              <span className="item__info-header">Town </span>
-              <span className="item__info">{this.props.item.town}</span>
+            <p className="item__info-wrapper" key="town">
+              <span className="item__info-header" key="infoHeader">Town </span>
+              <span className="item__info" key="info">{this.props.item.town}</span>
             </p>
-            <p className="item__info-wrapper">
-              <span className="item__info-header">Status </span>
-              <span className="item__info">{this.props.item.status}</span>
+            <p className="item__info-wrapper" key="status">
+              <span className="item__info-header" key="infoHeader">Status </span>
+              <span className="item__info" key="info">{this.props.item.status}</span>
             </p>
-            <p className="item__info-wrapper">
-              <span className="item__info-header">Radius </span>
-              <span className="item__info">{this.props.item.radius}km</span>
+            <p className="item__info-wrapper" key="radius">
+              <span className="item__info-header" key="infoHeader">Radius </span>
+              <span className="item__info" key="info">{this.props.item.radius}km</span>
             </p>
             <div className="item__button-wrapper">
               <Update className="item__button" updateStatusChange={this.updateStatusChange}/>

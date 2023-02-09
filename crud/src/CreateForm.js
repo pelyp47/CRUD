@@ -108,18 +108,18 @@ class CreateForm extends Component {
         return (
             <form className='input-form'>
 
-                <div className='input-form__group'>
+                <div className='input-form__group' key="nameGroup">
                     <label>Enter campaign name:</label>
                     <input required type = "text" autoComplete="off" placeholder='campaign name' id="name" value={this.state.name} onChange={this.nameChangeHandle}/>
                 </div>
 
-                <div className='input-form__group'>
+                <div className='input-form__group' key="keywordsGroup">
                     <label>Enter keywords: </label>
                     <div>
-                        <input required autoComplete="off" type = "text" placeholder='keywords' name="keywords" list="keywords" ref={this.keyWordInput} onBlur={this.addKeyword}/>
-                        <input value="+" type="submit" onClick={this.addKeyword}/>
+                        <input required autoComplete="off" type = "text" placeholder='keywords' key="keywords" name="keywords" list="keywords" ref={this.keyWordInput} onBlur={this.addKeyword}/>
+                        <input value="+" type="submit" onClick={this.addKeyword} key="keywordsSubmit"/>
                         <datalist id="keywords">
-                            {keywords.map(value=><option>{value}</option>)}
+                            {keywords.map(value=><option key={value}>{value}</option>)}
                         </datalist>
                     </div>
                     {
@@ -130,30 +130,30 @@ class CreateForm extends Component {
                     }
                 </div>
 
-                <div className='input-form__group'>
+                <div className='input-form__group' key="bidAmountGroup">
                     <label>Enter bid amount:</label>
                     <input required type = "number" placeholder="bid amount" id = "bid" min={minBidAmount+""} value={this.state.bidAmount} onChange={this.bidAmountChangeHandle}/>
                 </div>
 
-                <div className='input-form__group'>
+                <div className='input-form__group' key="campaignFoundGroup">
                     <label>Enter the campaign fund:</label>
                     <input required type = "number" placeholder='campaign fund' id="fund" min="1" value={this.state.campaignFund} onChange={this.campaignFundChangeHandle}/>
                 </div>
 
-                <div className='input-form__group'>
+                <div className='input-form__group' key="statusGroup">
                     <label>Enter the status:
                         <input required type = "checkbox" id="status" checked={this.state.status==="on"} onChange={this.statusChangeHandle}/>
                     </label>
                 </div>
 
-                <div className='input-form__group'>
+                <div className='input-form__group' key="townGroup">
                     <label>Choose the town:</label>
                     <select name = "town" value={this.state.town} id="town" onChange={this.townChangeHandle}>
-                        {cities.map(value=><option value={value}>{value}</option>)}
+                        {cities.map(value=><option key={value} value={value}>{value}</option>)}
                     </select>
                 </div>
 
-                <div className='input-form__group'>
+                <div className='input-form__group' key="radiusGroup">
                     <label>Enter the radius: </label>
                     <input type="number" id="radius" min="0" value={this.state.radius} onChange={this.radiusChangeHandle}/>
                 </div>
