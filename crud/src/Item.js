@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Update from './Update';
 import Delete from './Delete';
 import CreateForm from './CreateForm';
+import "./Item.css"
 
 class Item extends Component {
     constructor(props) {
@@ -18,18 +19,17 @@ class Item extends Component {
 
     updateStatusChange(event) {
       this.setState({...this.state, isUpdating: ! this.state.isUpdating})
-      console.log(1)
     }
     updateItem(newItemObj) {
       this.setState({...this.state, isUpdating:false, item: {...newItemObj}})
     }
     render() {
       if(this.state.isUpdating) {
-        return <CreateForm formType="update" initialObj={this.state.item} updateItem={this.updateItem}/>
+        return <CreateForm formType="update" key="form" initialObj={this.state.item} updateItem={this.updateItem}/>
       }
       else {
         return (
-        <article>
+        <article className="item">
             <h2>{this.state.item.name}</h2>
             <p>{this.state.item.keyWords.map(word=><span>{word+" "}</span>)}</p>
             <p>{this.state.item.bidAmount}$</p>
@@ -37,9 +37,9 @@ class Item extends Component {
             <p>{this.state.item.town}</p>
             <p>{this.state.item.status}</p>
             <p>{this.state.item.radius}km</p>
-            <div>
-              <Update updateStatusChange={this.updateStatusChange}/>
-              <Delete deleteId={this.props.deleteId} deleteFunc={this.props.deleteFunc}/>
+            <div className="item__button-wrapper">
+              <Update className="item__button" updateStatusChange={this.updateStatusChange}/>
+              <Delete className="item__button" deleteId={this.props.deleteId} deleteFunc={this.props.deleteFunc}/>
             </div>
           </article>)
       }

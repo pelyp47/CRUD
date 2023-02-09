@@ -8,7 +8,7 @@ const initialItem = {
   name: "",
   keyWords: [],
   bidAmount: 0,
-  campaignFund: 0,
+  campaignFund: 1,
   status: "off",
   town: "",
   radius: 0
@@ -35,8 +35,10 @@ class App extends Component {
   render() {
     return (
       <>
-        <CreateForm addItem={this.addItem} formType="create" initialObj={initialItem}/>
+        <header></header>
         <main className='main'>
+          <CreateForm key="mainForm" addItem={this.addItem} formType="create" initialObj={initialItem}/>
+        
           {this.state.items.map((item, iter)=>{
             return (
               <Item key={iter} deleteId={iter} item={item} deleteFunc={this.deleteItem}/>

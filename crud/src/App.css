@@ -1,9 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+*:focus {
+  outline: none;
+}
+* button {
+  padding: 0 5px;
+}
+
 .main {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  align-items: stretch;
+  gap: 2vw;
+  padding: 2vw;
 }
 
 /*# sourceMappingURL=App.css.map */

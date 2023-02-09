@@ -2,14 +2,14 @@ import './App.css';
 import React, { Component } from 'react';
 import './CreateForm.css';
 
-const keywords = ["phone", "laptop", "expensive", "cheap", "IOS"]
+let keywords = ["phone", "laptop", "expensive", "cheap", "IOS"]
 const cities = ["", "New York", "London", "Warsaw", "Berlin", "Barcelona"]
 const minBidAmount = 100
 
 class CreateForm extends Component {
     constructor(props) {
         super(props)
-        this.state={...this.props.initialObj}
+        this.state={...this.props.initialObj, bidAmount: minBidAmount}
 
         this.keyWordInput = React.createRef()
 
@@ -54,7 +54,8 @@ class CreateForm extends Component {
         else {
             this.props.updateItem(this.state)
         }
-        this.setState({...this.props.initialObj})
+        this.setState({...this.props.initialObj, bidAmount: minBidAmount})
+        this.keyWordInput.current.value=""
     }
 
     nameChangeHandle(event) {
@@ -103,48 +104,60 @@ class CreateForm extends Component {
 
     render() {
         return (
-            <div className='input-form'>
-                <label htmlFor="name">Enter campaign name:
-                <input required type = "text" autoComplete="off" placeholder='campaign name' id="name" value={this.state.name} onChange={this.nameChangeHandle}/>
-                </label>
+            <form className='input-form'>
 
-                <label for="keywords">Enter keywords: 
-                {this.state.keyWords.map((el, iter)=>{
-                    return <div><span>{el}</span> <button iter={iter} onClick={this.deleteKeyWord}>-</button></div>
-                    })
-                }
-                <input required autoComplete="off" type = "text" placeholder='keywords' name="keywords" list="keywords" ref={this.keyWordInput} onBlur={this.addKeyword}/>
-                <input value="+" type="submit" onClick={this.addKeyword}/>
-                <datalist id="keywords">
-                    {keywords.filter((el)=>!this.state.keyWords.includes(el)).map(value=><option>{value}</option>)}
-                </datalist>
-                </label>
+                <div className='input-form__group'>
+                    <label htmlFor="name">Enter campaign name:</label>
+                    <input required type = "text" autoComplete="off" placeholder='campaign name' id="name" value={this.state.name} onChange={this.nameChangeHandle}/>
+                </div>
 
+                <div className='input-form__group'>
+                    <label htmlFor="keywords">Enter keywords: </label>
+                    <div>
+                        <input required autoComplete="off" type = "text" placeholder='keywords' name="keywords" list="keywords" ref={this.keyWordInput} onBlur={this.addKeyword}/>
+                        <input value="+" type="submit" onClick={this.addKeyword}/>
+                        <datalist id="keywords">
+                            {keywords.map(value=><option>{value}</option>)}
+                        </datalist>
+                    </div>
+                    {
+                        this.state.keyWords.map((el, iter)=>{
+                                return <div><span>{el}</span> <button iter={iter} onClick={this.deleteKeyWord}>-</button></div>
+                            }
+                        )
+                    }
+                </div>
 
-                <label for="bid">Enter bid amount:
-                <input required type = "number" placeholder="bid amount" name = "bid" min={minBidAmount+""} value={this.state.bidAmount} onChange={this.bidAmountChangeHandle}/>
-                </label>
+                <div className='input-form__group'>
+                    <label htmlFor="bid">Enter bid amount:</label>
+                    <input required type = "number" placeholder="bid amount" id = "bid" min={minBidAmount+""} value={this.state.bidAmount} onChange={this.bidAmountChangeHandle}/>
+                </div>
 
-                <label for="fund">Enter the campaign fund:
-                <input required type = "number" placeholder='campaign fund' name="fund" min="1" value={this.state.campaignFund} onChange={this.campaignFundChangeHandle}/>
-                </label>
+                <div className='input-form__group'>
+                    <label htmlFor="fund">Enter the campaign fund:</label>
+                    <input required type = "number" placeholder='campaign fund' id="fund" min="1" value={this.state.campaignFund} onChange={this.campaignFundChangeHandle}/>
+                </div>
 
-                <label for="status">Enter the status:
-                <input required type = "checkbox" name="status" checked={this.state.status==="on"} onChange={this.statusChangeHandle}/>
-                </label>
-                
-                <label for="town">Choose the town:
-                <select name = "town" value={this.state.town} onChange={this.townChangeHandle}>
-                    {cities.map(value=><option value={value}>{value}</option>)}
-                </select>
-                </label>
+                <div className='input-form__group'>
+                    <label htmlFor="status">Enter the status:
+                        <input required type = "checkbox" id="status" checked={this.state.status==="on"} onChange={this.statusChangeHandle}/>
+                    </label>
+                </div>
 
-                <label for="radius">Enter the radius:
-                    <input type="number" name="radius" min="0" value={this.state.radius} onChange={this.radiusChangeHandle}/>
-                </label>
-                
-                <button type="submit" onClick={this.submitHandle}>submit</button>
-            </div>
+                <div className='input-form__group'>
+                    <label htmlFor="town">Choose the town:</label>
+                    <select name = "town" value={this.state.town} id="town" onChange={this.townChangeHandle}>
+                        {cities.map(value=><option value={value}>{value}</option>)}
+                    </select>
+                </div>
+
+                <div className='input-form__group'>
+                    <label htmlFor="radius">Enter the radius: </label>
+                    <input type="number" id="radius" min="0" value={this.state.radius} onChange={this.radiusChangeHandle}/>
+                </div>
+
+                <button className="input-form__button" type="submit" onClick={this.submitHandle}>submit</button>
+            </form>
         )
     }
 }

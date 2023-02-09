@@ -1,0 +1,25 @@
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: clamp(300px, 20vw, 500px);
+    padding: 15px 20px 10px;
+    min-height: 365px;
+    border-radius: 10px;
+    background-color: #c5c3c3;
+    &__button-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-self: stretch;
+    }
+    &__button {
+        width: 40%;
+        border-radius: 3px;
+        display: inline-block;
+        text-align: center;
+        padding: 5px 10px;
+        margin-top: 10px;
+        border: none;
+        background-color: #aaaaaa;
+    }
+}

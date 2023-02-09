@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "./Item.css"
 
 class Update extends Component {
     constructor() {
@@ -9,7 +10,7 @@ class Update extends Component {
 
     render() {
         return(
-            <button onClick={this.props.updateStatusChange}>Update</button>
+            <button className={this.props.className} onClick={this.props.updateStatusChange}>Update</button>
         )
     }
 }

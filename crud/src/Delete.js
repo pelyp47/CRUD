@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "./Item.css"
 
 class Delete extends Component {
     constructor() {
@@ -14,7 +15,7 @@ class Delete extends Component {
 
     render() {
         return(
-            <button onClick={this.deleteItem}>Delete</button>
+            <button className={this.props.className} onClick={this.deleteItem}>Delete</button>
         )
     }
 }
