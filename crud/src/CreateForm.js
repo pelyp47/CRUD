@@ -48,11 +48,13 @@ class CreateForm extends Component {
             alert("incorrect campaign fund")
             return
         }
+
         if(this.props.formType==="create") {
             this.props.addItem({...this.state})
         }
         else {
-            this.props.updateItem(this.state)
+            this.props.updateItem(this.state, this.props.changeId)
+            this.props.updateStatusChange()
         }
         this.setState({...this.props.initialObj, bidAmount: minBidAmount})
         this.keyWordInput.current.value=""
@@ -107,12 +109,12 @@ class CreateForm extends Component {
             <form className='input-form'>
 
                 <div className='input-form__group'>
-                    <label htmlFor="name">Enter campaign name:</label>
+                    <label>Enter campaign name:</label>
                     <input required type = "text" autoComplete="off" placeholder='campaign name' id="name" value={this.state.name} onChange={this.nameChangeHandle}/>
                 </div>
 
                 <div className='input-form__group'>
-                    <label htmlFor="keywords">Enter keywords: </label>
+                    <label>Enter keywords: </label>
                     <div>
                         <input required autoComplete="off" type = "text" placeholder='keywords' name="keywords" list="keywords" ref={this.keyWordInput} onBlur={this.addKeyword}/>
                         <input value="+" type="submit" onClick={this.addKeyword}/>
@@ -129,30 +131,30 @@ class CreateForm extends Component {
                 </div>
 
                 <div className='input-form__group'>
-                    <label htmlFor="bid">Enter bid amount:</label>
+                    <label>Enter bid amount:</label>
                     <input required type = "number" placeholder="bid amount" id = "bid" min={minBidAmount+""} value={this.state.bidAmount} onChange={this.bidAmountChangeHandle}/>
                 </div>
 
                 <div className='input-form__group'>
-                    <label htmlFor="fund">Enter the campaign fund:</label>
+                    <label>Enter the campaign fund:</label>
                     <input required type = "number" placeholder='campaign fund' id="fund" min="1" value={this.state.campaignFund} onChange={this.campaignFundChangeHandle}/>
                 </div>
 
                 <div className='input-form__group'>
-                    <label htmlFor="status">Enter the status:
+                    <label>Enter the status:
                         <input required type = "checkbox" id="status" checked={this.state.status==="on"} onChange={this.statusChangeHandle}/>
                     </label>
                 </div>
 
                 <div className='input-form__group'>
-                    <label htmlFor="town">Choose the town:</label>
+                    <label>Choose the town:</label>
                     <select name = "town" value={this.state.town} id="town" onChange={this.townChangeHandle}>
                         {cities.map(value=><option value={value}>{value}</option>)}
                     </select>
                 </div>
 
                 <div className='input-form__group'>
-                    <label htmlFor="radius">Enter the radius: </label>
+                    <label>Enter the radius: </label>
                     <input type="number" id="radius" min="0" value={this.state.radius} onChange={this.radiusChangeHandle}/>
                 </div>
 

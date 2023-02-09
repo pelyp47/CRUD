@@ -11,12 +11,23 @@
   padding: 0 5px;
 }
 
+.header {
+  text-align: right;
+  padding: 10px;
+}
+
 .main {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
   gap: 2vw;
   padding: 2vw;
+}
+
+@media (max-width: 660px) {
+  .main {
+    justify-content: center;
+  }
 }
 
 /*# sourceMappingURL=App.css.map */

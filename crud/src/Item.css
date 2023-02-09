@@ -8,6 +8,19 @@
   border-radius: 10px;
   background-color: #c5c3c3;
 }
+.item._off {
+  opacity: 0.4;
+}
+.item__info-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.item__info-header {
+  font-weight: 500;
+}
+.item__info {
+  max-width: 50%;
+}
 .item__button-wrapper {
   display: flex;
   justify-content: space-between;
